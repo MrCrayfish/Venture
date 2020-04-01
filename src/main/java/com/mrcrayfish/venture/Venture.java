@@ -7,11 +7,10 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.HugeTreeFeatureConfig;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placement.ChanceConfig;
+import net.minecraft.world.gen.placement.FrequencyConfig;
+import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.treedecorator.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.treedecorator.TrunkVineTreeDecorator;
@@ -37,7 +36,9 @@ public class Venture
 
     private void onCommonSetup(FMLCommonSetupEvent event)
     {
-        Biomes.PLAINS.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, ModFeatures.SURVIVAL_CAMP.get().func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_HEIGHTMAP.func_227446_a_(new ChanceConfig(8))));
+        Biomes.PLAINS.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, ModFeatures.SURVIVAL_CAMP.get().func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_TOP_SOLID_HEIGHTMAP.func_227446_a_(new ChanceConfig(40))));
+        Biomes.SUNFLOWER_PLAINS.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, ModFeatures.SURVIVAL_CAMP.get().func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_TOP_SOLID_HEIGHTMAP.func_227446_a_(new ChanceConfig(40))));
+        Biomes.SAVANNA.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, ModFeatures.SURVIVAL_CAMP.get().func_225566_b_(IFeatureConfig.NO_FEATURE_CONFIG).func_227228_a_(Placement.CHANCE_TOP_SOLID_HEIGHTMAP.func_227446_a_(new ChanceConfig(40))));
         //.func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG))
     }
 }

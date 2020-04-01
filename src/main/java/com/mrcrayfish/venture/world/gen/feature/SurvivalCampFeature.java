@@ -2,6 +2,7 @@ package com.mrcrayfish.venture.world.gen.feature;
 
 import com.mojang.datafixers.Dynamic;
 import com.mrcrayfish.venture.Reference;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.pattern.BlockStateMatcher;
 import net.minecraft.util.Mirror;
@@ -16,7 +17,6 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.Template;
-import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 import java.util.function.Function;
@@ -37,9 +37,9 @@ public class SurvivalCampFeature extends Feature<NoFeatureConfig>
     @Override
     public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config)
     {
-        for(pos = pos.up(); worldIn.isAirBlock(pos) && pos.getY() > 3; pos = pos.down());
+        for(pos = pos.up(); (worldIn.isAirBlock(pos) || worldIn.getBlockState(pos).getMaterial().isReplaceable()) && pos.getY() > 3; pos = pos.down());
 
-        if (!IS_GRASS.test(worldIn.getBlockState(pos)))
+        if(worldIn.getBlockState(pos).getBlock() != Blocks.GRASS_BLOCK || worldIn.getBlockState(pos.east(10)).getBlock() != Blocks.GRASS_BLOCK || worldIn.getBlockState(pos.south(10)).getBlock() != Blocks.GRASS_BLOCK)
         {
             return false;
         }
@@ -48,7 +48,8 @@ public class SurvivalCampFeature extends Feature<NoFeatureConfig>
         Template template = genRegion.getWorld().getSaveHandler().getStructureTemplateManager().getTemplate(SURVIVAL_CAMP_TEMPLATE);
         if(template != null)
         {
-            template.addBlocksToWorld(worldIn, pos, new PlacementSettings().setCenterOffset(new BlockPos(5, 1, 5)).setRotation(Rotation.randomRotation(rand)).setMirror(Mirror.values()[rand.nextInt(Mirror.values().length)]));
+            System.out.println(pos);
+            template.addBlocksToWorld(worldIn, pos, new PlacementSettings());
         }
         return true;
     }
