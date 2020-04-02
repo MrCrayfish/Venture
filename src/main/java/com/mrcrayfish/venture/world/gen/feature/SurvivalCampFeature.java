@@ -2,12 +2,9 @@ package com.mrcrayfish.venture.world.gen.feature;
 
 import com.mojang.datafixers.Dynamic;
 import com.mrcrayfish.venture.Reference;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.pattern.BlockStateMatcher;
-import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
