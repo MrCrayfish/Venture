@@ -16,7 +16,9 @@ import net.minecraft.world.gen.placement.DepthAverageConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -28,6 +30,7 @@ public class Venture
 {
     public Venture()
     {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.commonSpec);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModFeatures.REGISTER.register(bus);
         ModStructurePieceType.init();
@@ -52,7 +55,7 @@ public class Venture
 
     private void addSurvivalCamp(Biome biome)
     {
-        ConfiguredFeature<SurvivalCampConfig, ? extends Structure<SurvivalCampConfig>> survivalCampFeature = ModFeatures.SURVIVAL_CAMP.get().func_225566_b_(new SurvivalCampConfig(10));
+        ConfiguredFeature<SurvivalCampConfig, ? extends Structure<SurvivalCampConfig>> survivalCampFeature = ModFeatures.SURVIVAL_CAMP.get().func_225566_b_(new SurvivalCampConfig(Config.COMMON.survivalCampGenerateChance.get()));
         biome.func_226711_a_(survivalCampFeature);
         biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, survivalCampFeature.func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
     }
