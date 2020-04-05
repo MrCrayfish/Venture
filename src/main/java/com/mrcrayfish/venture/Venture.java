@@ -3,6 +3,7 @@ package com.mrcrayfish.venture;
 import com.mrcrayfish.venture.init.ModFeatures;
 import com.mrcrayfish.venture.init.ModStructurePieceType;
 import com.mrcrayfish.venture.world.gen.feature.HugeOreFeatureConfig;
+import com.mrcrayfish.venture.world.gen.feature.SurvivalCampConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -39,7 +40,6 @@ public class Venture
         this.addSurvivalCamp(Biomes.SUNFLOWER_PLAINS);
         this.addSurvivalCamp(Biomes.SAVANNA);
         this.addSurvivalCamp(Biomes.SAVANNA_PLATEAU);
-        this.addSurvivalCamp(Biomes.SWAMP);
         this.addSurvivalCamp(Biomes.BIRCH_FOREST);
         this.addSurvivalCamp(Biomes.DARK_FOREST);
 
@@ -52,7 +52,7 @@ public class Venture
 
     private void addSurvivalCamp(Biome biome)
     {
-        ConfiguredFeature<NoFeatureConfig, ? extends Structure<NoFeatureConfig>> survivalCampFeature = ModFeatures.SURVIVAL_CAMP.get().func_225566_b_(NoFeatureConfig.NO_FEATURE_CONFIG);
+        ConfiguredFeature<SurvivalCampConfig, ? extends Structure<SurvivalCampConfig>> survivalCampFeature = ModFeatures.SURVIVAL_CAMP.get().func_225566_b_(new SurvivalCampConfig(10));
         biome.func_226711_a_(survivalCampFeature);
         biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, survivalCampFeature.func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
     }

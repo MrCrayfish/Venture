@@ -1,12 +1,8 @@
 package com.mrcrayfish.venture.world.gen.feature;
 
 import com.mojang.datafixers.Dynamic;
-import com.mrcrayfish.venture.Reference;
 import com.mrcrayfish.venture.world.gen.feature.structure.SurvivalCamp;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.pattern.BlockStateMatcher;
 import net.minecraft.util.Mirror;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +15,6 @@ import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.feature.template.TemplateManager;
@@ -31,9 +26,9 @@ import java.util.function.Function;
 /**
  * Author: MrCrayfish
  */
-public class SurvivalCampStructure extends Structure<NoFeatureConfig>
+public class SurvivalCampStructure extends Structure<SurvivalCampConfig>
 {
-    public SurvivalCampStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory)
+    public SurvivalCampStructure(Function<Dynamic<?>, ? extends SurvivalCampConfig> configFactory)
     {
         super(configFactory);
     }
@@ -43,7 +38,9 @@ public class SurvivalCampStructure extends Structure<NoFeatureConfig>
     {
         if(generator.hasStructure(biome, this))
         {
-            return true;
+            ((SharedSeedRandom) rand).setLargeFeatureSeedWithSalt(generator.getSeed(), chunkX, chunkZ, 0xF00D);
+            SurvivalCampConfig config = generator.getStructureConfig(biome, this);
+            return config != null && rand.nextInt(config.chance) == 0;
         }
         return false;
     }
@@ -89,7 +86,7 @@ public class SurvivalCampStructure extends Structure<NoFeatureConfig>
             int height2 = generator.func_222532_b(posX + 13, posZ + 3, Heightmap.Type.OCEAN_FLOOR_WG);
             int height3 = generator.func_222532_b(posX + 3, posZ + 13, Heightmap.Type.OCEAN_FLOOR_WG);
             int height4 = generator.func_222532_b(posX + 13, posZ + 13, Heightmap.Type.OCEAN_FLOOR_WG);
-            if(height1 == height2 && height1 == height3 && height1 == height4 && height1 > generator.getSeaLevel())
+            if(height1 == height2 && height1 == height3 && height1 == height4 && height1 >= generator.getSeaLevel())
             {
                 BlockPos pos = new BlockPos(posX + 3, 90, posZ + 3);
                 Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
