@@ -2,6 +2,7 @@ package com.mrcrayfish.venture.world.gen.feature.structure;
 
 import com.mrcrayfish.venture.Reference;
 import com.mrcrayfish.venture.init.ModStructurePieceType;
+import com.mrcrayfish.venture.world.gen.feature.SurvivalCampConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
@@ -30,16 +31,17 @@ public class SurvivalCamp
 {
     public static class Piece extends TemplateStructurePiece
     {
-        private static final ResourceLocation SURVIVAL_CAMP_TEMPLATE = new ResourceLocation(Reference.MOD_ID, "survival_camp");
         private static final ResourceLocation CHESTS_SURVIVAL_CAMP_CHEST = new ResourceLocation(Reference.MOD_ID, "chests/survival_camp");
 
         private Rotation rotation;
+        private ResourceLocation templateLocation;
 
-        public Piece(TemplateManager manager, BlockPos pos, Rotation rotation, Mirror mirror)
+        public Piece(TemplateManager manager, BlockPos pos, Rotation rotation, SurvivalCampConfig config)
         {
             super(ModStructurePieceType.SURVIVAL_CAMP, 0);
             this.rotation = rotation;
             this.templatePosition = pos;
+            this.templateLocation = config.template;
             this.loadTemplate(manager);
         }
 
@@ -47,12 +49,13 @@ public class SurvivalCamp
         {
             super(ModStructurePieceType.SURVIVAL_CAMP, compound);
             this.rotation = Rotation.valueOf(compound.getString("Rot"));
+            this.templateLocation = new ResourceLocation(compound.getString("Template"));
             this.loadTemplate(manager);
         }
 
         private void loadTemplate(TemplateManager manager)
         {
-            Template template = manager.getTemplateDefaulted(SURVIVAL_CAMP_TEMPLATE);
+            Template template = manager.getTemplateDefaulted(this.templateLocation);
             PlacementSettings settings = (new PlacementSettings()).setRotation(this.rotation).setCenterOffset(new BlockPos(5, 0, 5)).addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK).addProcessor(JigsawReplacementStructureProcessor.INSTANCE);
             this.setup(template, this.templatePosition, settings);
         }
@@ -62,6 +65,7 @@ public class SurvivalCamp
         {
             super.readAdditional(compound);
             compound.putString("Rot", this.rotation.name());
+            compound.putString("Template", this.templateLocation.toString());
         }
 
         @Override

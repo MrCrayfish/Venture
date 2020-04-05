@@ -1,6 +1,7 @@
 package com.mrcrayfish.venture.world.gen.feature;
 
 import com.mojang.datafixers.Dynamic;
+import com.mrcrayfish.venture.init.ModFeatures;
 import com.mrcrayfish.venture.world.gen.feature.structure.SurvivalCamp;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -90,8 +91,12 @@ public class SurvivalCampStructure extends Structure<SurvivalCampConfig>
             {
                 BlockPos pos = new BlockPos(posX + 3, 90, posZ + 3);
                 Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-                this.components.add(new SurvivalCamp.Piece(manager, pos, rotation, Mirror.NONE));
-                this.recalculateStructureSize();
+                SurvivalCampConfig config = generator.getStructureConfig(biome, ModFeatures.SURVIVAL_CAMP.get());
+                if(config != null)
+                {
+                    this.components.add(new SurvivalCamp.Piece(manager, pos, rotation, config));
+                    this.recalculateStructureSize();
+                }
             }
         }
 

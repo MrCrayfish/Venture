@@ -5,6 +5,7 @@ import com.mrcrayfish.venture.init.ModStructurePieceType;
 import com.mrcrayfish.venture.world.gen.feature.HugeOreFeatureConfig;
 import com.mrcrayfish.venture.world.gen.feature.SurvivalCampConfig;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
@@ -28,6 +29,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(Reference.MOD_ID)
 public class Venture
 {
+    public static final ResourceLocation OAK_SURVIVAL_CAMP = new ResourceLocation(Reference.MOD_ID, "oak_survival_camp");
+    public static final ResourceLocation ACACIA_SURVIVAL_CAMP = new ResourceLocation(Reference.MOD_ID, "acacia_survival_camp");
+    public static final ResourceLocation DARK_OAK_SURVIVAL_CAMP = new ResourceLocation(Reference.MOD_ID, "dark_oak_survival_camp");
+
     public Venture()
     {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.commonSpec);
@@ -39,12 +44,13 @@ public class Venture
 
     private void onCommonSetup(FMLCommonSetupEvent event)
     {
-        this.addSurvivalCamp(Biomes.PLAINS);
-        this.addSurvivalCamp(Biomes.SUNFLOWER_PLAINS);
-        this.addSurvivalCamp(Biomes.SAVANNA);
-        this.addSurvivalCamp(Biomes.SAVANNA_PLATEAU);
-        this.addSurvivalCamp(Biomes.BIRCH_FOREST);
-        this.addSurvivalCamp(Biomes.DARK_FOREST);
+        this.addSurvivalCamp(Biomes.PLAINS, OAK_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.SUNFLOWER_PLAINS, OAK_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.SAVANNA, ACACIA_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.SAVANNA_PLATEAU, ACACIA_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.FOREST, OAK_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.BIRCH_FOREST, OAK_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.DARK_FOREST, DARK_OAK_SURVIVAL_CAMP);
 
         Biome.BIOMES.forEach(biome -> {
             ConfiguredFeature<HugeOreFeatureConfig, ? extends Structure<HugeOreFeatureConfig>> hugeOreFeature = ModFeatures.HUGE_ORE.get().func_225566_b_(new HugeOreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Blocks.IRON_ORE.getDefaultState(), 50, 200));
@@ -53,9 +59,9 @@ public class Venture
         });
     }
 
-    private void addSurvivalCamp(Biome biome)
+    private void addSurvivalCamp(Biome biome, ResourceLocation templateLocation)
     {
-        ConfiguredFeature<SurvivalCampConfig, ? extends Structure<SurvivalCampConfig>> survivalCampFeature = ModFeatures.SURVIVAL_CAMP.get().func_225566_b_(new SurvivalCampConfig(Config.COMMON.survivalCampGenerateChance.get()));
+        ConfiguredFeature<SurvivalCampConfig, ? extends Structure<SurvivalCampConfig>> survivalCampFeature = ModFeatures.SURVIVAL_CAMP.get().func_225566_b_(new SurvivalCampConfig(Config.COMMON.survivalCampGenerateChance.get(), templateLocation));
         biome.func_226711_a_(survivalCampFeature);
         biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, survivalCampFeature.func_227228_a_(Placement.NOPE.func_227446_a_(IPlacementConfig.NO_PLACEMENT_CONFIG)));
     }
