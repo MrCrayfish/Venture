@@ -1,0 +1,63 @@
+{
+    "type": "minecraft:chest",
+    "pools": [
+        {
+            "rolls": 1,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "weight": 1,
+                    "functions": [
+                        {
+                            "function": "minecraft:exploration_map",
+                            "destination": "venture:huge_ore",
+                            "decoration": "red_x",
+                            "zoom": 1,
+                            "skip_existing_chunks": false
+                        },
+                        {
+                            "function": "minecraft:set_name",
+                            "name": {
+                                "translate": "filled_map.venture.huge_ore"
+                            }
+                        }
+                    ],
+                    "name": "minecraft:map"
+                }
+
+            ]
+        },
+        {
+            "rolls": 2,
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "weight": 1,
+                    "functions": [
+                        {
+                            "function": "minecraft:exploration_map",
+                            "destination": "venture:huge_ore",
+                            "decoration": "red_x",
+                            "zoom": 1,
+                            "skip_existing_chunks": false
+                        },
+                        {
+                            "function": "minecraft:set_name",
+                            "name": {
+                                "translate": "filled_map.venture.huge_ore"
+                            }
+                        },
+                        {
+                            "function": "minecraft:set_count",
+                            "count": {
+                                "min": 0,
+                                "max": 1
+                            }
+                        }
+                    ],
+                    "name": "minecraft:map"
+                }
+            ]
+        }
+    ]
+}

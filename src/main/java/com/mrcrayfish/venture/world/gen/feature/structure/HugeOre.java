@@ -1,5 +1,6 @@
 package com.mrcrayfish.venture.world.gen.feature.structure;
 
+import com.mrcrayfish.venture.init.ModStructurePieceType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -20,13 +21,13 @@ public class HugeOre
     {
         public Piece(BlockPos pos)
         {
-            super(StructurePieceType.HUGE_ORE_PIECE, 0);
+            super(ModStructurePieceType.HUGE_ORE_PIECE, 0);
             this.boundingBox = new MutableBoundingBox(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
         }
 
-        Piece(TemplateManager manager, CompoundNBT compound)
+        public Piece(TemplateManager manager, CompoundNBT compound)
         {
-            super(StructurePieceType.HUGE_ORE_PIECE, compound);
+            super(ModStructurePieceType.HUGE_ORE_PIECE, compound);
         }
 
         @Override
