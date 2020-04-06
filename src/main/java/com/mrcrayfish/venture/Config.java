@@ -18,7 +18,7 @@ public class Config
             {
                 builder.comment("Structures").push("structures");
                 {
-                    this.survivalCampGenerateChance = builder.comment("The chance for a survival camp to generate. This value is assumed to be \"1 out of X\" to generate.").defineInRange("survivalCampGenerateChance", 25, 1, Integer.MAX_VALUE);
+                    this.survivalCampGenerateChance = builder.comment("The chance for a survival camp to generate. This value is interpreted as \"1 out of X\" to generate a survival camp.").defineInRange("survivalCampGenerateChance", 25, 1, Integer.MAX_VALUE);
                 }
                 builder.pop();
             }
