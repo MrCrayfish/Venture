@@ -4,6 +4,7 @@ import com.mrcrayfish.venture.init.ModFeatures;
 import com.mrcrayfish.venture.init.ModStructurePieceType;
 import com.mrcrayfish.venture.world.gen.feature.HugeOreFeatureConfig;
 import com.mrcrayfish.venture.world.gen.feature.SurvivalCampConfig;
+import com.mrcrayfish.venture.world.gen.feature.structure.SurvivalCamp;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
@@ -29,9 +30,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(Reference.MOD_ID)
 public class Venture
 {
-    public static final ResourceLocation OAK_SURVIVAL_CAMP = new ResourceLocation(Reference.MOD_ID, "oak_survival_camp");
-    public static final ResourceLocation ACACIA_SURVIVAL_CAMP = new ResourceLocation(Reference.MOD_ID, "acacia_survival_camp");
-    public static final ResourceLocation DARK_OAK_SURVIVAL_CAMP = new ResourceLocation(Reference.MOD_ID, "dark_oak_survival_camp");
+
 
     public Venture()
     {
@@ -44,13 +43,13 @@ public class Venture
 
     private void onCommonSetup(FMLCommonSetupEvent event)
     {
-        this.addSurvivalCamp(Biomes.PLAINS, OAK_SURVIVAL_CAMP);
-        this.addSurvivalCamp(Biomes.SUNFLOWER_PLAINS, OAK_SURVIVAL_CAMP);
-        this.addSurvivalCamp(Biomes.SAVANNA, ACACIA_SURVIVAL_CAMP);
-        this.addSurvivalCamp(Biomes.SAVANNA_PLATEAU, ACACIA_SURVIVAL_CAMP);
-        this.addSurvivalCamp(Biomes.FOREST, OAK_SURVIVAL_CAMP);
-        this.addSurvivalCamp(Biomes.BIRCH_FOREST, OAK_SURVIVAL_CAMP);
-        this.addSurvivalCamp(Biomes.DARK_FOREST, DARK_OAK_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.PLAINS, SurvivalCamp.OAK_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.SUNFLOWER_PLAINS, SurvivalCamp.OAK_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.SAVANNA, SurvivalCamp.ACACIA_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.SAVANNA_PLATEAU, SurvivalCamp.ACACIA_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.FOREST, SurvivalCamp.OAK_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.BIRCH_FOREST, SurvivalCamp.OAK_SURVIVAL_CAMP);
+        this.addSurvivalCamp(Biomes.DARK_FOREST, SurvivalCamp.DARK_OAK_SURVIVAL_CAMP);
 
         Biome.BIOMES.forEach(biome -> {
             ConfiguredFeature<HugeOreFeatureConfig, ? extends Structure<HugeOreFeatureConfig>> hugeOreFeature = ModFeatures.HUGE_ORE.get().func_225566_b_(new HugeOreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Blocks.IRON_ORE.getDefaultState(), 50, 200));

@@ -29,6 +29,10 @@ import java.util.stream.Stream;
  */
 public class SurvivalCamp
 {
+    public static final ResourceLocation OAK_SURVIVAL_CAMP = new ResourceLocation(Reference.MOD_ID, "oak_survival_camp");
+    public static final ResourceLocation ACACIA_SURVIVAL_CAMP = new ResourceLocation(Reference.MOD_ID, "acacia_survival_camp");
+    public static final ResourceLocation DARK_OAK_SURVIVAL_CAMP = new ResourceLocation(Reference.MOD_ID, "dark_oak_survival_camp");
+
     public static class Piece extends TemplateStructurePiece
     {
         private static final ResourceLocation CHESTS_SURVIVAL_CAMP_CHEST = new ResourceLocation(Reference.MOD_ID, "chests/survival_camp");
