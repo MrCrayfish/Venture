@@ -8,7 +8,7 @@ displayName="Venture"
 updateJSONURL="https://raw.githubusercontent.com/MrCrayfish/ModUpdates/master/venture/update.json"
 displayURL="http://mrcrayfish.com/mods?id=venture"
 logoFile="venture.png"
-credits="<FILL THIS IN> on Twitter for the mod idea" #TODO fill this in
+credits="@Capptianm on Twitter for the mod idea"
 authors="MrCrayfish"
 description="A mod that builds upon adventuring in Minecraft"
 
